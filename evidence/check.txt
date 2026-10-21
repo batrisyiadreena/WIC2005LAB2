@@ -1,0 +1,4 @@
+PROBLEM: h2 and h4 both use 10.84.0.2
+PROBLEM: h2 and h4 both use fd00:4884::2
+PROBLEM: link references unknown node s9
+Fix the description and try again.
