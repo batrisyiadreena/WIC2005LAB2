@@ -1,0 +1,92 @@
+# page.yaml: the words on your page, kept as data like everything else.
+# make_page.py puts each answer under its question. A few sentences each, in your own words;
+# leave a blank line between paragraphs. Refer to YOUR network and YOUR evidence.
+# Never put your name or full student ID here: the page is public.
+
+repository: https://github.com/batrisyiadreena/WIC2005LAB2.git
+
+design: >
+  The network uses three interconnected switches arranged in a triangle.
+  Six hosts connect to the switches, with two hosts per switch.
+  The redundant switch links provide alternative paths through the topology.
+
+evidence: >
+  The pingall test checks IPv4 reachability between hosts.
+  IPv6 ping tests verify IPv6 connectivity, while the neighbour and MAC
+  tables show address resolution and switch forwarding information.
+  The DAD evidence demonstrates how IPv6 detects a duplicate address.
+
+answers:
+  planes:
+    question: "Where are the data, control and management planes in your network?"
+    answer: >
+      The data plane is in the switches, which forward Ethernet frames
+      between host ports. The control plane includes the switches'
+      MAC learning and forwarding decisions. The management plane is
+      represented by the scripts and configuration files used to describe,
+      build, check and document the network.
+
+  learning:
+    question: "How did your switches learn which port leads to each host? Use your MAC table evidence."
+    answer: >
+      The switches learned MAC addresses dynamically by examining the
+      source MAC address of incoming Ethernet frames and associating each
+      address with the port where the frame arrived. The MAC table evidence
+      from brctl showmacs shows the learned MAC addresses and their
+      corresponding switch ports. Entries are learned as hosts transmit
+      traffic.
+
+  kind:
+    question: "Which of the four kinds of programmability is this assignment (a network described as data, then built and documented by scripts)? Why isn't it any of the other three?"
+    answer: >
+      This assignment demonstrates intent-based networking through a
+      declarative network description and automation. The YAML file
+      expresses the desired topology, while scripts build, validate and
+      document it. It is not traditional manual configuration because
+      scripts perform the repetitive work, not direct device-by-device
+      commands. It is not purely software-defined networking because
+      there is no separate central SDN controller directing the switches.
+      It is not AI-driven networking because no artificial intelligence
+      makes autonomous network decisions.
+
+  two_am:
+    question: "Week 1's 2 a.m. change on 40 switches: what would be different if those switches were described like your network?"
+    answer: >
+      Instead of manually changing 40 switches one by one at 2 a.m.,
+      I could update the network description and use automation to apply
+      the change consistently. I could validate the configuration before
+      deployment, keep the changes in Git, and use the previous version
+      to recover if something went wrong. This reduces repetitive work
+      and configuration errors.
+
+  model:
+    question: "What's the difference between your network's data model and its serialisation? Use YAML and JSON as the example."
+    answer: >
+      The data model defines the network's structure and information:
+      switches, hosts, addresses and links. Serialisation is how that
+      information is represented in a file. YAML and JSON are two
+      different serialisation formats for the same data model. Therefore,
+      build_topo.py can construct the same network from either file
+      without changing the underlying topology.
+
+  check:
+    question: "Why is it better to catch bad data in check() than with pingall? What did IPv6 notice about a duplicate address that IPv4 didn't?"
+    answer: >
+      The check() function detects duplicate addresses and links to
+      nonexistent nodes before the network is built. This makes errors
+      easier to identify and fix than discovering them through failed
+      connectivity tests with pingall. IPv6 Duplicate Address Detection
+      (DAD) can detect that an address is already in use and mark the
+      duplicate address as dadfailed. IPv4 does not automatically reject
+      a duplicate address in the same way, so the duplicate may be
+      configured without an immediate warning.
+
+  git:
+    question: "What does your Git history give you that copying files into folders named topology-v2-final wouldn't?"
+    answer: >
+      Git records changes over time, including what changed, when it
+      changed and who made the change. I can compare versions, identify
+      mistakes, restore an earlier version and collaborate with others.
+      Unlike folders with names such as topology-v2-final, Git provides
+      a structured change history without requiring me to create and
+      manage separate copies manually.
