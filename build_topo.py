@@ -57,7 +57,22 @@ def check(spec):
     Week 2 task: report any IP address that is used by more than one host.
     """
     problems = []
-    # TODO: your code here
+    seen = {}
+
+    for host in spec["hosts"]:
+        for key in ("ip", "ipv6"):
+            if key not in host:
+                continue
+
+            address = host[key].split("/")[0]
+
+            if address in seen:
+                problems.append(
+                    f"{seen[address]} and {host['name']} both use {address}"
+                )
+            else:
+                seen[address] = host["name"]
+
     return problems
 
 
