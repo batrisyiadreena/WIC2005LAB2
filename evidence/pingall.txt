@@ -1,0 +1,8 @@
+*** Ping: testing ping reachability
+h1 -> X X X X X
+h2 -> X X h4 X h6
+h3 -> X X X X X
+h4 -> X h2 X h5 X
+h5 -> X X X X X
+h6 -> X X X X X
+*** Results: 86% dropped (4/30 received)
