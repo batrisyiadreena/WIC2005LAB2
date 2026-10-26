@@ -1,0 +1,46 @@
+# page3.yaml: the words on your Week 3 page. make_page3.py puts each answer under its question.
+# A few sentences each, in your own words, about YOUR network and YOUR evidence.
+# Leave a blank line between paragraphs. Never put your name or full student ID here.
+
+repository: https://github.com/batrisyiadreena/WIC2005LAB2
+
+answers:
+  design:
+    question: "Describe your design: why these routers, LANs and links, and how you chose the addresses."
+    answer: |
+      I designed a network with four routers and four LANs,
+      with one host on each LAN. The routers form a ring,
+      providing an alternative physical path between routers.
+      All networks use my assigned 10.84.0.0/16 address block.
+      Each LAN uses the .1 address for its router and .10
+      for its host, while router links use .1 and .2.
+
+  summary:
+    question: "Which route summarises several LANs? Which networks does it cover, why is it correct, and what else would it attract if you added a network inside its range?"
+    answer: |
+      The 10.84.0.0/19 route on r3 and r4 summarises
+      10.84.1.0/24 and 10.84.2.0/24. Both LANs are within
+      the summary range, while the LANs 10.84.32.0/24
+      and 10.84.33.0/24 are outside it. A new network
+      inside the /19 range would also match this summary
+      and could be sent to the same next hop.
+
+  failure:
+    question: "When you took a link down, what happened, and why couldn't your routes recover even though another path existed? What would have recovered?"
+    answer: |
+      When I took the r1-r4 link down, traffic from h1 to h4
+      could no longer follow r1's static route through r4.
+      Although an alternative path existed through r2 and r3,
+      the static route did not automatically change. A dynamic
+      routing protocol or a correctly configured backup route
+      could provide failover.
+
+  control_plane:
+    question: "In your network, what was the control plane? Who worked out the routes, and what does that mean for a network of 40 routers?"
+    answer: |
+      I worked out the routes and entered them in network.yaml.
+      The Python checks validated the paths before Mininet
+      built the network, and Linux installed the static routes.
+      For 40 routers, manually maintaining routes would become
+      more difficult, so a dynamic routing protocol could
+      calculate and update routes automatically.
